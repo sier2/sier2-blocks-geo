@@ -1,1 +1,1 @@
-from ._geo import ReadGeoPoints, GeoPoints, GeoPointsSelect
+from .geo import ReadGeoPoints, GeoPoints, GeoPointsSelect

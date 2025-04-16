@@ -12,8 +12,6 @@ import geoviews.tile_sources as gvts
 
 gv.extension('bokeh', inline=True)
 
-BASEMAP_URL = config()['basemap_url']
-
 def guess_lon_col(cols):
     """
     Given a list of columns, guess what is an acceptable longitude column name.
@@ -81,15 +79,23 @@ class GeoPoints(Block):
     """The Points element visualizes as markers placed in a space of two independent variables."""
 
     in_gdf = param.DataFrame(doc='A geo pandas dataframe containing a location column')
+    in_basemap_url = param.String(doc='Basemap URL for display', default=None)
+    
     out_gdf = param.DataFrame(doc='Output geo pandas dataframe')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        if BASEMAP_URL is not None:
-            self.map = gv.WMTS(BASEMAP_URL).opts(active_tools=['wheel_zoom'])
+        if self.in_basemap_url is not None:
+            self.map = gv.WMTS(self.in_basemap_url).opts(active_tools=['wheel_zoom'])
         else:
-            self.map = gvts.CartoMidnight().opts(active_tools=['wheel_zoom'])
+            # If we haven't explicitly passed a basemap url, check config.
+            #
+            basemap_url = self.get_config_value('BASEMAP_URL')
+            if basemap_url is not None:
+                self.map = gv.WMTS(basemap_url).opts(active_tools=['wheel_zoom'])
+            else:
+                self.map = gvts.CartoMidnight().opts(active_tools=['wheel_zoom'])
 
         self.hv_pane = pn.pane.HoloViews(sizing_mode='stretch_width', min_height=600)#'scale_both')
         self.hv_pane.object=self._produce_plot
@@ -113,18 +119,29 @@ class GeoPointsSelect(Block):
     """The Points element visualizes as markers placed in a space of two independent variables."""
 
     in_gdf = param.DataFrame(doc='A geo pandas dataframe containing a location column')
+    in_basemap_url = param.String(doc='Basemap URL for display', default=None)
+
     out_gdf = param.DataFrame(doc='Output geo pandas dataframe')
 
     def __init__(self, *args, block_pause_execution=True, **kwargs):
         super().__init__(*args, block_pause_execution=block_pause_execution, **kwargs)
 
-        if BASEMAP_URL is not None:
-            self.map = gv.WMTS(BASEMAP_URL).opts(
+        if self.in_basemap_url is not None:
+            self.map = gv.WMTS(self.in_basemap_url).opts(
                 tools=['box_select', 'lasso_select'],
                 active_tools=['wheel_zoom'],
             )
         else:
-            self.map = gvts.CartoMidnight().opts(
+            # If we haven't explicitly passed a basemap url, check config.
+            #
+            basemap_url = self.get_config_value('BASEMAP_URL')
+            if basemap_url is not None:
+                self.map = gv.WMTS(basemap_url).opts(
+                tools=['box_select', 'lasso_select'],
+                active_tools=['wheel_zoom'],
+            )
+            else:
+                self.map = gvts.CartoMidnight().opts(
                 tools=['box_select', 'lasso_select'],
                 active_tools=['wheel_zoom'],
             )

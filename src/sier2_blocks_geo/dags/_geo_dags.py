@@ -6,7 +6,7 @@ from sier2_blocks.blocks._view import SimpleTable
 from ..blocks.geo import ReadGeoPoints, GeoPoints, GeoPointsSelect
 
 def geo_points():
-    sdf = StaticDataFrame(name='Load DataFrame', block_pause_execution=True)
+    sdf = StaticDataFrame(name='Load Static DataFrame', block_pause_execution=True)
     rgp = ReadGeoPoints(name='Spatialize DataFrame')
     gps = GeoPointsSelect(name='Plot Points')
     gp = GeoPoints(name='View Selection')
