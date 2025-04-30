@@ -1,9 +1,9 @@
 from sier2 import Connection
 from sier2.panel import PanelDag
 
-from sier2_blocks.blocks._test_data import StaticDataFrame
-from sier2_blocks.blocks._view import SimpleTable
-from ..blocks.geo import ReadGeoPoints, GeoPoints, GeoPointsSelect
+from sier2_blocks.blocks.test_data import StaticDataFrame
+from sier2_blocks.blocks.view import SimpleTable
+from ..blocks import ReadGeoPoints, GeoPoints, GeoPointsSelect
 
 def geo_points():
     sdf = StaticDataFrame(name='Load Static DataFrame', block_pause_execution=True)

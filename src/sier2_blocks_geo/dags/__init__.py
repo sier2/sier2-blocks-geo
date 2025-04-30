@@ -1,1 +1,1 @@
-from ._geo_dags import geo_points
+from .geo_dags import geo_points

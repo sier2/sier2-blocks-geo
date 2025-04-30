@@ -1,5 +1,4 @@
 from sier2 import Block
-from sier2_blocks_config import config
 import param
 
 import panel as pn

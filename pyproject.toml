@@ -1,6 +1,6 @@
 [project]
 name = "sier2-blocks-geo"
-version = "0.1"
+version = "0.3"
 description = "Geo blocks for sier2"
 authors = [
     {name="jacobgolding", email="jacobgolding <jacobgolding@users.noreply.github.com>"}
@@ -18,18 +18,17 @@ classifiers = [
 
 [dependencies]
 python = "^3.11"
-
-holoviews = "^1.19.0"
 panel = ">=1.4.4"
 param = ">=2.1.0"
-
-sier2=">=0.28"
+sier2 = ">=0.30"
+geoviews = ">=1.13"
 
 [tool.poetry.plugins."sier2.library"]
 export = "sier2_blocks_geo.shelf"
 
 [[tool.mypy.overrides]]
 module = [
+    "sier2",
     "sier2-blocks",
     "holoviews",
     "param",
