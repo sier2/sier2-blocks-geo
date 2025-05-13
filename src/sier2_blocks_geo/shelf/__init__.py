@@ -9,5 +9,5 @@ def blocks() -> list[Info]:
 
 def dags() -> list[Info]:
     return [
-        Info('sier2_blocks_geo.dags:geo_points', 'Load and plot a dataframe as geo points'),
+        Info('sier2_blocks_geo.dags.geo_dags:geo_points', 'Load and plot a dataframe as geo points'),
     ]

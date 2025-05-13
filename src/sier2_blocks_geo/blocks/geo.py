@@ -42,7 +42,7 @@ def guess_lat_col(cols):
     return cols[1]
 
 class ReadGeoPoints(Block):
-    """The Points element visualizes as markers placed in a space of two independent variables."""
+    """Add geo-enablement to a dataframe, using lat and lon columns."""
 
     in_df = param.DataFrame(doc='A pandas dataframe containing x,y values')
     in_lat_col = param.ObjectSelector(doc='Latitude column name')
@@ -75,7 +75,7 @@ class ReadGeoPoints(Block):
         )
 
 class GeoPoints(Block):
-    """The Points element visualizes as markers placed in a space of two independent variables."""
+    """Plot a geospatial dataframe with points data."""
 
     in_gdf = param.DataFrame(doc='A geo pandas dataframe containing a location column')
     in_basemap_url = param.String(doc='Basemap URL for display', default=None)
