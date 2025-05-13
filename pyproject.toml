@@ -1,6 +1,6 @@
 [project]
 name = "sier2-blocks-geo"
-version = "0.5"
+version = "0.6"
 description = "Geo blocks for sier2"
 authors = [
     {name="jacobgolding", email="jacobgolding <jacobgolding@users.noreply.github.com>"}
@@ -22,7 +22,8 @@ panel = ">=1.4.4"
 param = ">=2.1.0"
 sier2 = ">=0.39"
 geoviews = ">=1.13"
-sier2-blocks
+sier2-blocks = ">=0.12"
+geopandas = ">=1.0.1"
 
 [tool.poetry.plugins."sier2.library"]
 export = "sier2_blocks_geo.shelf"
